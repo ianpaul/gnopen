@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 #------------------------------------------------------------------------------------------------------------------------
 
-# The program starts by asking the user to input the name of a GUI program. 
+# The program starts by asking the user to input the name of a GUI-based program. 
 # gnopen then stores the value of user input in "app".
 read -p "Name your app: " app
 
@@ -29,13 +29,15 @@ then
 # print a message to tell the user their request succeeded
   echo "Coming right up!"
 
-# if $app does not exist, then search the '*.desktop' files and see if you can match '*$app*.desktop', but don't print the
-# results.
+# if $app does not exist, then search the '*.desktop' files and see if you can match '*$app*.desktop', but don't 
+# print the results.
 else 
    if 
      grep -h -q $app /usr/share/applications/*.desktop; 
-# If there was a match repeat the search, but this time strip out the "Exec=" and the "%" arguments
-# and print the result to the terminal. This is not an efficient solution. Later, I hope to figure out how to pass the
+# If there was a match or several matches repeat the search. This time look inside the first matching '.desktop' file
+# and find the line that says "Exec=." Next, strip out the "Exec=" and the "%" arguments and 
+# print the result to the terminal. 
+# This is not an efficient solution. Later, I hope to figure out how to pass the
 # results from the first 'grep' in the nested IF statement and pass the result to the THEN statement below; however, my 
 # best alternative may be a FOR-DO loop with a nested IF-ELSE.
    then  
