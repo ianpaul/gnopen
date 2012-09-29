@@ -16,12 +16,32 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 #------------------------------------------------------------------------------------------------------------------------
 
+# The program starts by asking the user to input the name of a GUI program. 
+# gnopen then stores the value of user input in "app".
 read -p "Name your app: " app
 
+# tests to see if $app exists
 if
-  type $app &>dev/null; 
+  type $app &>/dev/null;
+# if $app exists, execute $app and send all output to /dev/null so you don't bother the user 
 then
-  $app >/dev/null 2>&1 &  
+  $app >/dev/null 2>&1 &
+# print a message to tell the user their request succeeded
+  echo "Coming right up!"
+
+# if $app does not exist, then search the '*.desktop' files and see if you can match '*$app*.desktop', but don't print the
+# results.
 else 
-  grep -h $app /usr/share/applications/*.desktop | grep -m 1 "^Exec=" | sed 's/^Exec=//' | echo "That didn't work. Here's a suggestion:" `sed 's/%.//'` 
+   if 
+     grep -h -q $app /usr/share/applications/*.desktop; 
+# If there was a match repeat the search, but this time strip out the "Exec=" and the "%" arguments
+# and print the result to the terminal. This is not an efficient solution. Later, I hope to figure out how to pass the
+# results from the first 'grep' in the nested IF statement and pass the result to the THEN statement below; however, my 
+# best alternative may be a FOR-DO loop with a nested IF-ELSE.
+   then  
+     grep -h $app /usr/share/applications/*.desktop | grep -m 1 "^Exec=" | sed 's/^Exec=//' |  echo "That didn't work. Here's a suggestion:" `sed 's/%.//'`
+# If no match was found then print the fail message below
+   else
+      echo "Sorry, that command doesn't exist and an alternative was not found."
+   fi 
 fi 
