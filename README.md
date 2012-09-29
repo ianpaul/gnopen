@@ -9,7 +9,7 @@ background so that you can use your current terminal window for other purposes.
 Download the gnopen repository by clicking the "ZIP" button from https://github.com/ianpaul/gnopen. You can then 
 extract and save "gnopen.sh" in a directory of your choice such as '/home/user/bin'. 
 If you already have a directory dedicated to scripts, put gnopen in there. 
-Alternatively, you can just leave the gnopen directory in /home.
+Alternatively, you can just leave the gnopen directory in /home/user.
 
 Next, make gnopen executable with 'chmod u+rx' and then create an alias in your .bashrc file such as 
 "gnopen='~/bin/gnopen.sh'. 
