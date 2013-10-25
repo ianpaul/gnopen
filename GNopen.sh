@@ -16,11 +16,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 #------------------------------------------------------------------------------------------------------------------------
 
-# The program starts by asking the user to input the name of a GUI-based program. 
-# gnopen then stores the value of user input in "app".
-read -p "Name your app: " app
+# First check to see if there is an argument added to the gnopen 
+# command. If there isn't one, print a request to the terminal
+# asking the user to input an app name
 
-# tests to see if $app exists
+	if [ -z "$1" ]; then
+#ask the user for the name of the app
+	 read -p "Name your app: " app
+
+	 else app=$1
+	fi
+
+# then test to see if $app exists
 if
   type $app &>/dev/null;
 # if $app exists, execute $app and send all output to /dev/null so you don't bother the user 
@@ -45,5 +52,5 @@ else
 # If no match was found then print the fail message below
    else
       echo "Sorry, that command doesn't exist and an alternative was not found."
-   fi 
-fi 
+   		fi 
+	fi 
