@@ -1,20 +1,23 @@
 #!/bin/bash
 
-#------------------------------------------------------------------------------------------------------------------------
-# Copyright 2012 Ian Paul
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 3 
-# as published by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
+#-------------------------------------------------------------------------
+# 									
+# gnopen version 0.20							
+# Copyright 2012-2013 Ian Paul						
+# https://github.com/ianpaul/gnopen 					
+#                                 					
+# This program is free software: you can redistribute it and/or modify	
+# it under the terms of the GNU General Public License version 3 	
+# as published by the Free Software Foundation.				
+#									
+# This program is distributed in the hope that it will be useful,	
+# but WITHOUT ANY WARRANTY; without even the implied warranty of	
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the		
+# GNU General Public License for more details.				
+#									
+# You should have received a copy of the GNU General Public License	
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 
-#------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------
 
 # First check to see if there is an argument added to the gnopen 
 # command. If there isn't one, print a request to the terminal
@@ -45,8 +48,7 @@ else
 # and find the line that says "Exec=." Next, strip out the "Exec=" and the "%" arguments and 
 # print the result to the terminal. 
 # This is not an efficient solution. Later, I hope to figure out how to pass the
-# results from the first 'grep' in the nested IF statement and pass the result to the THEN statement below; however, my 
-# best alternative may be a FOR-DO loop with a nested IF-ELSE.
+# results from the first 'grep' to the THEN statement below.
    then  
      grep -h $app /usr/share/applications/*.desktop | grep -m 1 "^Exec=" | sed 's/^Exec=//' |  echo "That didn't work. Here's a suggestion:" `sed 's/%.//'`
 # If no match was found then print the fail message below
