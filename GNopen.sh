@@ -50,7 +50,9 @@ else
 # This is not an efficient solution. Later, I hope to figure out how to pass the
 # results from the first 'grep' to the THEN statement below.
    then  
-     grep -h $app /usr/share/applications/*.desktop | grep -m 1 "^Exec=" | sed 's/^Exec=//' |  echo "That didn't work. Here's a suggestion:" `sed 's/%.//'`
+     echo "Coming right up! Press CTRL + C to dismiss any messages the app prints to the terminal." 
+     sleep 1
+     grep -h $app /usr/share/applications/*.desktop | grep -m 1 "^Exec=" | app2=$(`sed 's/^Exec=//'`) | $app2 >/dev/null 2>&1 & #app2=$(`sed 's/%.//'`) | $app2 >/dev/null 2>&1 &
 # If no match was found then print the fail message below
    else
       echo "Sorry, that command doesn't exist and an alternative was not found."
